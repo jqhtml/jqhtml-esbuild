@@ -1,0 +1,41 @@
+{
+  "name": "@jqhtml/esbuild-plugin",
+  "version": "0.0.1",
+  "description": "esbuild plugin for compiling .jqhtml templates to JavaScript",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "files": [
+    "src"
+  ],
+  "keywords": [
+    "esbuild",
+    "plugin",
+    "jqhtml",
+    "jquery",
+    "components",
+    "templates",
+    "rails"
+  ],
+  "author": "hansonxyz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jqhtml/jqhtml-esbuild.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jqhtml/jqhtml-esbuild/issues"
+  },
+  "homepage": "https://jqhtml.org/",
+  "peerDependencies": {
+    "@jqhtml/parser": ">=1.0.0",
+    "esbuild": ">=0.17.0"
+  },
+  "devDependencies": {
+    "@jqhtml/parser": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
