@@ -94,12 +94,13 @@ window.jQuery = window.$ = $;
 import jqhtml, { boot, init_jquery_plugin } from '@jqhtml/core';
 init_jquery_plugin($);
 
-// Import and register components
+// Import components
 import AlertBox from './components/AlertBox.jqhtml';
-import UserCard from './components/UserCard.jqhtml';
+import Counter from './components/Counter.js';
 
+// Register components
 jqhtml.register(AlertBox);
-jqhtml.register(UserCard);
+jqhtml.register(Counter);
 
 // Boot when DOM is ready
 $(document).ready(async () => {
@@ -109,12 +110,62 @@ $(document).ready(async () => {
 
 ## Creating Components
 
+### Template-only Component
+
 ```html
 <!-- src/components/AlertBox.jqhtml -->
 <Define:AlertBox tag="div" class="alert">
     <strong><%= this.args.title %></strong>
     <p><%= this.args.message %></p>
 </Define:AlertBox>
+```
+
+### Interactive Component with JS Class
+
+```html
+<!-- src/components/Counter.jqhtml -->
+<Define:Counter tag="div" class="counter">
+    <button $sid="decrement">-</button>
+    <span $sid="display"><%= this.data.count %></span>
+    <button $sid="increment">+</button>
+</Define:Counter>
+```
+
+```javascript
+// src/components/Counter.js
+import { Jqhtml_Component } from '@jqhtml/core';
+import CounterTemplate from './Counter.jqhtml';
+
+class Counter extends Jqhtml_Component {
+    on_create() {
+        this.data.count = this.args.initial || 0;
+    }
+
+    on_ready() {
+        this.$sid('increment').on('click', () => {
+            this.data.count++;
+            this.$sid('display').text(this.data.count);
+        });
+        this.$sid('decrement').on('click', () => {
+            this.data.count--;
+            this.$sid('display').text(this.data.count);
+        });
+    }
+}
+
+export default Counter;
+```
+
+### Note on Minification
+
+If your build uses class name mangling, you must either:
+
+1. Add `static component_name = 'Counter'` to each component class, or
+2. Use explicit registration:
+
+```javascript
+jqhtml.register_template(CounterTemplate);
+jqhtml.register_component('Counter', Counter);
 ```
 
 ## Using Components in HTML
