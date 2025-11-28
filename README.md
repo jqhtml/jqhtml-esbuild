@@ -5,7 +5,7 @@ esbuild plugin for compiling `.jqhtml` templates to JavaScript.
 ## Installation
 
 ```bash
-npm install @jqhtml/esbuild-plugin @jqhtml/parser @jqhtml/core jquery
+npm install @jqhtml/esbuild-plugin@latest @jqhtml/parser@latest @jqhtml/core@latest jquery
 ```
 
 ## Usage
